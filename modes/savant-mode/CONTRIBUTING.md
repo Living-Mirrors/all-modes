@@ -8,9 +8,9 @@
 
 Savant Mode is one genius type: *Dyslexic Genius*. It was built from the cognitive architecture of dyslexic minds - the specific perception patterns that emerge from long-range neural connectivity.
 
-But dyslexia is not the only divergent architecture. ADHD produces hyperfocus cascades and novelty-driven pattern detection. Autism produces systematic depth and perceptual precision at scales neurotypical minds do not reach. Synesthesia produces cross-sensory binding. Every neurodivergent architecture has a cognitive surplus that has been measured as a deficit. Every one of them could be a genius type.
+But dyslexia is not the only divergent architecture. Every neurodivergent mind has perception patterns that sequential thinking does not produce. Cognitive surpluses that have been measured as deficits. Architectures that see what others filter out.
 
-This is an invitation to build yours.
+Each one could be a genius type. This is an invitation to build yours.
 
 ---
 
