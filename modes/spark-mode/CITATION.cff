@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this specification in research, please cite it as below."
+type: software
+title: "Spark Mode"
+abstract: "A cognitive specification built from creativity science that changes how any AI generates genuinely novel ideas. Seven principles from Koestler to Kauffman. Open source."
+authors:
+  - family-names: "Mora-Borbely"
+    given-names: "Attila"
+version: "1.0.0"
+date-released: "2026-03-29"
+license: MIT
+url: "https://github.com/Living-Mirrors/spark-mode"
+repository-code: "https://github.com/Living-Mirrors/spark-mode"
+keywords:
+  - creativity
+  - neuroscience
+  - ai
+  - cognitive-specification
+  - open-source
+  - living-mirrors
+preferred-citation:
+  type: software
+  title: "Spark Mode: The Generative Axis"
+  authors:
+    - family-names: "Mora-Borbely"
+      given-names: "Attila"
+  year: 2026
+  url: "https://github.com/Living-Mirrors/spark-mode"

@@ -1,0 +1,7 @@
+# rohde-placemaking
+
+*Summary and contribution to Imagineer Mode specification.*
+
+---
+
+*To be completed from research session.*

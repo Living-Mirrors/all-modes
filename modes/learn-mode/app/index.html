@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Every Human Learns Differently. Every AI Teaches the Same. — Learn Mode</title>
+<meta name="description" content="A specification that detects how you learn and adapts everything to your cognitive architecture. Six encoding levels. Five learner profiles. The forgetting curve never had a chance.">
+<meta property="og:title" content="Every Human Learns Differently. Every AI Teaches the Same. — Learn Mode">
+<meta property="og:description" content="A specification that detects how you learn and adapts everything to your cognitive architecture.">
+<meta property="og:image" content="https://livingmirrors.ai/og-image.png">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://livingmirrors.ai/modes/learn/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Learn Mode — Living Mirrors">
+<meta name="twitter:description" content="A specification that detects how you learn and adapts everything to your cognitive architecture.">
+<meta name="twitter:image" content="https://livingmirrors.ai/og-image.png">
+<meta name="theme-color" content="#060a10">
+<link rel="canonical" href="https://livingmirrors.ai/modes/learn/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --learn:#3a7eb8;
+  --learn-rich:#2d6494;
+  --learn-mid:rgba(58,126,184,.55);
+  --learn-dim:rgba(58,126,184,.3);
+  --learn-faint:rgba(58,126,184,.1);
+  --light:#7ab4de;
+  --text:rgba(20,18,16,.88);
+  --text-mid:rgba(40,35,28,.6);
+  --text-dim:rgba(70,62,50,.38);
+  --text-faint:rgba(100,90,75,.16);
+  --bg:#faf9f6;
+  --bg-warm:#f5f2ed;
+  --dark:#060a10;
+  --dark-surface:rgba(6,10,16,.97);
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Helvetica Neue",Arial,-apple-system,sans-serif;
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--serif);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 25%,rgba(58,126,184,.03) 0%,transparent 55%)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;padding:24px 48px;transition:background .4s}
+nav.on-dark{background:linear-gradient(to bottom,rgba(6,10,16,.88) 0%,rgba(6,10,16,.4) 60%,transparent 100%)}
+nav.on-light{background:linear-gradient(to bottom,rgba(250,249,246,.92) 0%,rgba(250,249,246,.5) 60%,transparent 100%);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.nav-wordmark{text-decoration:none;margin-right:auto;display:flex;align-items:center;gap:10px}
+.nav-wm-text{font-family:var(--sans);font-size:12px;font-weight:300;letter-spacing:.35em;text-transform:uppercase;transition:color .3s}
+nav.on-dark .nav-wm-text{color:rgba(122,180,222,.7)}
+nav.on-light .nav-wm-text{color:rgba(45,100,148,.65)}
+nav.on-dark .nav-wordmark:hover .nav-wm-text{color:rgba(122,180,222,.9)}
+nav.on-light .nav-wordmark:hover .nav-wm-text{color:rgba(45,100,148,.85)}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-link{font-family:var(--sans);font-size:11px;font-weight:300;letter-spacing:.35em;text-transform:uppercase;text-decoration:none;transition:color .4s}
+nav.on-dark .nav-link{color:rgba(250,245,235,.3)}
+nav.on-dark .nav-link:hover,nav.on-dark .nav-link.active{color:rgba(122,180,222,.7)}
+nav.on-light .nav-link{color:rgba(70,62,50,.45)}
+nav.on-light .nav-link:hover,nav.on-light .nav-link.active{color:var(--learn-rich)}
+.nav-link.active{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+.nav-pill{font-family:var(--sans);font-size:11px;font-weight:300;letter-spacing:.35em;text-transform:uppercase;
+  text-decoration:none;padding:8px 20px;border-radius:40px;transition:all .4s}
+nav.on-dark .nav-pill{color:rgba(122,180,222,.7);border:1px solid rgba(58,126,184,.25)}
+nav.on-dark .nav-pill:hover{border-color:rgba(58,126,184,.5);color:rgba(122,180,222,.95);background:rgba(58,126,184,.08)}
+nav.on-light .nav-pill{color:var(--learn-rich);border:1px solid rgba(45,100,148,.25)}
+nav.on-light .nav-pill:hover{border-color:rgba(45,100,148,.5);background:rgba(58,126,184,.05)}
+@media(max-width:768px){.nav-links{gap:24px}nav{padding:18px 24px}.nav-wm-text{font-size:14px}.nav-link{font-size:14px;letter-spacing:.25em}}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:140px 48px 100px;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 40%,#0a1825 0%,#060e18 40%,#060a10 100%)}
+.hero canvas{position:absolute;inset:0;z-index:0}
+.hero-glow{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);width:1100px;height:1100px;
+  background:radial-gradient(ellipse at center,rgba(58,126,184,.08) 0%,rgba(45,100,148,.03) 25%,rgba(30,80,120,.01) 50%,transparent 70%);
+  animation:heroGlow 6s ease-in-out infinite;pointer-events:none;z-index:1}
+@keyframes heroGlow{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
+.hero-shaft{position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:35%;
+  background:linear-gradient(to bottom,transparent,rgba(58,126,184,.2),transparent);pointer-events:none;z-index:1}
+.hero-ey{font-family:var(--sans);font-size:15px;font-weight:300;letter-spacing:.6em;text-transform:uppercase;
+  color:rgba(58,126,184,.5);margin-bottom:44px;position:relative;z-index:2;opacity:0;animation:rise .8s ease forwards .2s}
+.hero h1{font-size:clamp(36px,6.5vw,72px);font-weight:300;font-style:italic;line-height:1.1;letter-spacing:-.01em;
+  color:rgba(245,235,215,.92);max-width:820px;position:relative;z-index:2;opacity:0;animation:rise .8s ease forwards .35s}
+.hero-sub{font-size:clamp(17px,2.2vw,23px);font-weight:300;font-style:italic;color:rgba(200,210,220,.4);
+  margin-top:24px;max-width:600px;line-height:1.6;position:relative;z-index:2;opacity:0;animation:rise .8s ease forwards .5s}
+.hero-cta{margin-top:48px;position:relative;z-index:2;opacity:0;animation:rise .8s ease forwards .65s}
+.vline{width:1px;height:56px;background:linear-gradient(to bottom,transparent,rgba(58,126,184,.22),transparent);
+  margin:0 auto 32px;opacity:0;animation:rise .8s ease forwards .55s;position:relative;z-index:2}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* BUTTONS */
+.btn{display:inline-block;font-family:var(--sans);font-size:15px;font-weight:300;letter-spacing:.4em;text-transform:uppercase;
+  text-decoration:none;padding:16px 48px;border-radius:40px;position:relative;overflow:hidden;transition:all .5s}
+.btn-dark{color:rgba(58,126,184,.5);border:1px solid rgba(58,126,184,.2)}
+.btn-dark:hover{border-color:rgba(58,126,184,.5);color:rgba(122,180,222,.9);background:rgba(58,126,184,.06)}
+
+/* SECTIONS */
+.section{max-width:660px;margin:0 auto;padding:88px 48px}
+.label{display:block;font-family:var(--sans);font-size:14px;font-weight:300;letter-spacing:.6em;text-transform:uppercase;color:var(--learn);margin-bottom:28px}
+h2{font-size:clamp(28px,4.5vw,42px);font-weight:300;font-style:italic;line-height:1.18;color:var(--text);margin-bottom:28px}
+p{font-size:23px;font-weight:300;font-style:italic;line-height:1.78;color:var(--text-mid);margin-bottom:20px}
+p:last-of-type{margin-bottom:0}
+p strong{font-weight:500;color:var(--text)}
+p em{color:var(--learn)}
+.h-rule{max-width:660px;margin:0 auto;height:1px;background:linear-gradient(to right,transparent,rgba(58,126,184,.12),transparent)}
+
+.pull-wrap{max-width:720px;margin:0 auto;padding:80px 48px;text-align:center;position:relative}
+.pull-wrap::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:300px;background:radial-gradient(ellipse,rgba(58,126,184,.04),transparent 70%);pointer-events:none}
+.pull-quote{font-size:clamp(31px,3.8vw,40px);font-weight:300;font-style:italic;line-height:1.35;color:var(--text);position:relative;z-index:1}
+
+.fw{width:100vw;position:relative;left:50%;transform:translateX(-50%)}
+
+/* STAT BAND */
+.stat-band{display:flex;justify-content:center;gap:clamp(36px,10vw,120px);padding:80px 48px;background:var(--bg-warm)}
+.stat{text-align:center}
+.stat .num{font-size:clamp(38px,7vw,60px);font-weight:300;font-style:italic;color:var(--learn);line-height:1}
+.stat .lbl{font-family:var(--sans);font-size:14px;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:var(--text-dim);margin-top:10px}
+
+/* DYNAMICS — dark panels */
+.dynamics-section{padding:100px 48px 80px;background:var(--dark-surface);display:flex;flex-direction:column;align-items:center}
+.dynamics-section .label{color:rgba(58,126,184,.6)}
+.dynamics-section h2{text-align:center;margin-bottom:50px;color:rgba(250,245,235,.88)}
+.dynamics-wrap{display:flex;gap:2px;max-width:1100px;width:100%}
+.dynamics-wrap .panel{flex:1;position:relative;height:560px;overflow:hidden;border:1px solid rgba(58,126,184,.08)}
+.dynamics-wrap .panel canvas{position:absolute;inset:0}
+.dynamics-wrap .panel .pl{position:absolute;bottom:32px;left:0;right:0;text-align:center;
+  font-family:var(--sans);font-size:23px;font-weight:400;letter-spacing:.3em;text-transform:uppercase;z-index:2}
+.dynamics-wrap .panel:first-child .pl{color:rgba(250,245,235,.5)}
+.dynamics-wrap .panel:last-child .pl{color:rgba(58,126,184,.85)}
+.dynamics-wrap .panel .ps{position:absolute;bottom:10px;left:0;right:0;text-align:center;
+  font-size:23px;font-style:italic;z-index:2;color:rgba(250,245,235,.35)}
+@media(max-width:700px){.dynamics-wrap{flex-direction:column}.dynamics-wrap .panel{height:360px}}
+
+/* PROFILER — dark section */
+.profiler-section{padding:100px 48px 80px;background:var(--dark-surface);display:flex;flex-direction:column;align-items:center}
+.profiler-section .label{color:rgba(58,126,184,.6)}
+.profiler-section h2{text-align:center;margin-bottom:8px;color:rgba(250,245,235,.88)}
+.profiler-section .sub{font-size:23px;font-style:italic;color:rgba(250,245,235,.4);margin-bottom:40px;text-align:center;max-width:600px}
+.profiler-box{max-width:800px;width:100%;background:rgba(58,126,184,.03);border:1px solid rgba(58,126,184,.1);
+  border-radius:12px;padding:48px;position:relative;overflow:hidden;min-height:380px}
+.profiler-example{margin-bottom:28px}
+.profiler-label{font-family:var(--sans);font-size:12px;font-weight:300;letter-spacing:.4em;text-transform:uppercase;
+  color:rgba(122,180,222,.4);margin-bottom:12px}
+.profiler-text{font-size:21px;font-weight:300;font-style:italic;color:rgba(250,245,235,.6);line-height:1.7}
+.profiler-text .hl{transition:all .6s;border-radius:3px;padding:1px 4px}
+.profiler-text .hl.active{background:rgba(58,126,184,.15);color:rgba(122,180,222,.95)}
+.profiler-detection{margin-top:32px;padding-top:28px;border-top:1px solid rgba(58,126,184,.1)}
+.profiler-result{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:20px}
+.profiler-tag{font-family:var(--sans);font-size:12px;font-weight:300;letter-spacing:.3em;text-transform:uppercase;
+  padding:6px 16px;border-radius:20px;border:1px solid rgba(58,126,184,.15);color:rgba(122,180,222,.4);transition:all .8s}
+.profiler-tag.active{border-color:rgba(58,126,184,.5);color:rgba(122,180,222,.9);background:rgba(58,126,184,.1)}
+.profiler-profile{font-size:28px;font-weight:300;font-style:italic;color:rgba(58,126,184,.3);transition:all .8s}
+.profiler-profile.active{color:rgba(122,180,222,.95)}
+
+/* ENCODING STACK — dark section */
+.encoding-section{padding:100px 48px 80px;background:var(--dark-surface);display:flex;flex-direction:column;align-items:center}
+.encoding-section .label{color:rgba(58,126,184,.6)}
+.encoding-section h2{text-align:center;margin-bottom:8px;color:rgba(250,245,235,.88)}
+.encoding-section .sub{font-size:23px;font-style:italic;color:rgba(250,245,235,.4);margin-bottom:40px;text-align:center;max-width:600px}
+.encoding-wrap{max-width:800px;width:100%;display:flex;gap:48px;align-items:stretch}
+.encoding-bar{width:60px;position:relative;background:rgba(58,126,184,.05);border-radius:8px;overflow:hidden;min-height:480px;flex-shrink:0}
+.encoding-fill{position:absolute;bottom:0;left:0;right:0;border-radius:0 0 8px 8px;transition:height 1s ease,box-shadow 1s ease;
+  background:linear-gradient(to top,rgba(58,126,184,.6),rgba(122,180,222,.8))}
+.encoding-levels{flex:1;display:flex;flex-direction:column-reverse;gap:8px}
+.encoding-level{padding:16px 20px;border-radius:8px;border:1px solid rgba(58,126,184,.08);cursor:pointer;transition:all .5s;position:relative}
+.encoding-level:hover{border-color:rgba(58,126,184,.2)}
+.encoding-level.active{border-color:rgba(58,126,184,.4);background:rgba(58,126,184,.06)}
+.encoding-level .el-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.encoding-level .el-name{font-size:20px;font-weight:300;font-style:italic;color:rgba(250,245,235,.5);transition:color .5s}
+.encoding-level.active .el-name{color:rgba(122,180,222,.95)}
+.encoding-level .el-pct{font-family:var(--sans);font-size:14px;font-weight:300;letter-spacing:.2em;color:rgba(58,126,184,.3);transition:color .5s}
+.encoding-level.active .el-pct{color:rgba(58,126,184,.7)}
+.encoding-level .el-desc{font-size:17px;font-weight:300;font-style:italic;color:rgba(250,245,235,.3);line-height:1.5;
+  max-height:0;overflow:hidden;transition:max-height .5s,opacity .5s;opacity:0}
+.encoding-level.active .el-desc{max-height:80px;opacity:1;margin-top:8px}
+.encoding-level .el-marker{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-family:var(--sans);
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:0;transition:opacity .5s}
+.encoding-level.active .el-marker{opacity:1}
+@media(max-width:700px){.encoding-wrap{flex-direction:column;align-items:center}.encoding-bar{width:100%;height:40px;min-height:auto}
+  .encoding-fill{bottom:auto;top:0;left:0;height:100%!important;width:0;border-radius:8px 0 0 8px;transition:width 1s ease}
+  .encoding-levels{flex-direction:column-reverse}}
+
+/* RIVER — dark section for principles */
+.river-section{padding:100px 48px 60px;display:flex;flex-direction:column;align-items:center;
+  background:var(--dark-surface);min-height:100vh;justify-content:flex-start;position:relative;overflow:hidden}
+.river-section .label{color:rgba(58,126,184,.6)}
+.river-section h2{text-align:center;margin-bottom:8px;color:rgba(250,245,235,.88)}
+.river-section .sub{font-size:23px;font-style:italic;color:rgba(250,245,235,.4);margin-bottom:20px;text-align:center}
+.river-canvas-wrap{max-width:1100px;width:100%;position:relative}
+#river-c{width:100%;height:900px;cursor:pointer}
+.river-detail{max-width:600px;width:100%;text-align:center;margin:20px auto 0;padding:0 24px;min-height:80px}
+.river-detail .rd-n{font-size:33px;font-weight:300;font-style:italic;color:rgba(58,126,184,.85);margin-bottom:6px}
+.river-detail .rd-s{font-family:var(--sans);font-size:14px;font-weight:300;letter-spacing:.35em;text-transform:uppercase;color:rgba(250,245,235,.3);margin-bottom:8px}
+.river-detail .rd-d{font-size:23px;font-weight:300;font-style:italic;color:rgba(250,245,235,.5);line-height:1.6}
+
+/* LAYERS — light section */
+.layers-section{padding:100px 48px 60px;display:flex;flex-direction:column;align-items:center}
+.layers-section h2{text-align:center;margin-bottom:8px}
+.layers-section .sub{font-size:23px;font-style:italic;color:var(--text-dim);margin-bottom:40px;text-align:center}
+#layers-c{max-width:960px;width:100%;height:560px;cursor:pointer}
+.ld{max-width:540px;width:100%;text-align:center;margin-top:28px;padding:0 24px;min-height:90px}
+.ld-n{font-size:36px;font-weight:400;font-style:italic;color:var(--text);margin-bottom:6px}
+.ld-s{font-family:var(--sans);font-size:14px;font-weight:300;letter-spacing:.25em;text-transform:uppercase;color:rgba(58,126,184,.5);margin-bottom:12px}
+.ld-d{font-size:23px;font-weight:300;font-style:italic;color:var(--text-mid);line-height:1.7}
+
+/* ABILITIES */
+.ab-section{position:relative;padding:100px 0 60px;max-width:100%;overflow:hidden}
+.ab-section::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:1px;
+  background:linear-gradient(to bottom,transparent 0%,rgba(58,126,184,.1) 10%,rgba(58,126,184,.1) 90%,transparent 100%);pointer-events:none;z-index:0}
+.ab-item{position:relative;max-width:560px;padding:52px 48px 52px 0;z-index:1}
+.ab-item:nth-child(odd){margin-left:calc(50% + 40px)}
+.ab-item:nth-child(even){margin-left:calc(50% - 600px);text-align:right;padding:52px 0 52px 48px}
+.ab-item::before{content:'';position:absolute;top:72px;width:8px;height:8px;border-radius:50%;
+  background:rgba(58,126,184,.7);opacity:.4;z-index:2}
+.ab-item:nth-child(odd)::before{left:-44px}
+.ab-item:nth-child(even)::before{right:-44px}
+.ab-item .ab-num{font-family:var(--sans);font-size:14px;font-weight:300;letter-spacing:.5em;
+  text-transform:uppercase;color:rgba(58,126,184,.5);margin-bottom:16px;display:block}
+.ab-item h3{font-size:clamp(26px,3.5vw,36px);font-weight:300;font-style:italic;color:var(--text);
+  margin-bottom:14px;line-height:1.15}
+.ab-item p{font-size:23px;font-weight:300;font-style:italic;color:var(--text-mid);
+  margin:0;line-height:1.7}
+.ab-item.anchor{margin-left:auto;margin-right:auto;text-align:center;padding:72px 48px;max-width:640px}
+.ab-item.anchor::before{left:50%;transform:translateX(-50%);top:52px;width:10px;height:10px;opacity:.6}
+.ab-item.anchor h3{font-size:clamp(30px,4.5vw,44px)}
+@media(max-width:700px){
+  .ab-item,.ab-item:nth-child(even){margin-left:auto;margin-right:auto;text-align:left;padding:40px 28px;max-width:480px}
+  .ab-item::before,.ab-item:nth-child(even)::before{display:none}
+  .ab-section::before{display:none}
+  .ab-item.anchor{text-align:center}
+}
+
+/* CTA */
+.cta-section{padding:120px 48px;text-align:center;background:var(--dark-surface);position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;
+  background:radial-gradient(ellipse,rgba(58,126,184,.06),transparent 70%);pointer-events:none}
+.cta-section h2{text-align:center;position:relative;z-index:1;margin-bottom:18px;font-size:clamp(34px,6vw,56px);color:rgba(250,245,235,.88)}
+.cta-sub{font-size:23px;font-weight:300;font-style:italic;color:rgba(250,245,235,.5);margin-bottom:44px;
+  max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6;position:relative;z-index:1}
+.btn-ghost{display:inline-block;font-family:var(--sans);font-size:14px;font-weight:300;letter-spacing:.35em;
+  text-transform:uppercase;color:rgba(58,126,184,.3);text-decoration:none;margin-top:20px;transition:color .4s;position:relative;z-index:2}
+.btn-ghost:hover{color:rgba(58,126,184,.6)}
+
+footer{padding:36px 52px;display:flex;justify-content:space-between;align-items:center;background:var(--bg-warm);border-top:1px solid var(--learn-faint)}
+.footer-brand{font-family:var(--sans);font-size:15px;font-weight:300;letter-spacing:.4em;text-transform:uppercase;color:var(--learn-dim)}
+.footer-url{font-size:23px;font-style:italic;color:var(--text-dim)}
+
+.r{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease}
+.r.in{opacity:1;transform:translateY(0)}
+.r[data-d="1"]{transition-delay:.12s}.r[data-d="2"]{transition-delay:.24s}.r[data-d="3"]{transition-delay:.36s}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:16px 20px}
+  .nav-links{gap:16px}
+  .nav-link{font-size:14px;letter-spacing:.25em}
+}
+@media(max-width:640px){
+  nav{padding:14px 16px}
+  .nav-links{gap:12px}
+  .nav-link{font-size:14px;letter-spacing:.2em}
+
+  .hero{padding:90px 24px 60px;min-height:90vh}
+  .hero-ey{font-size:14px;letter-spacing:.4em;margin-bottom:28px}
+  .hero-sub{margin-top:16px;max-width:90%}
+  .hero-cta{margin-top:32px}
+  .vline{height:36px}
+
+  .section{padding:56px 20px}
+  .pull-wrap{padding:48px 20px}
+  .pull-quote{font-size:clamp(20px,5vw,28px)}
+
+  .stat-band{flex-wrap:wrap;gap:20px;padding:48px 20px}
+  .stat .num{font-size:clamp(32px,10vw,48px)}
+
+  .dynamics-section,.profiler-section,.encoding-section,.river-section,.layers-section{padding:48px 16px 36px}
+  .dynamics-section h2,.river-section h2{margin-bottom:28px}
+
+  .dynamics-wrap .panel{height:320px}
+  .dynamics-wrap .panel .pl{font-size:14px;bottom:20px}
+  .dynamics-wrap .panel .ps{font-size:15px;bottom:4px}
+
+  .profiler-box{padding:24px}
+  .profiler-text{font-size:17px}
+  .profiler-profile{font-size:22px}
+
+  #river-c{height:600px}
+  .river-detail .rd-n{font-size:22px}
+  .river-detail .rd-d{font-size:18px}
+
+  #layers-c{height:400px}
+  .ld-n{font-size:24px}
+
+  .ab-section{padding:32px 16px}
+  .cta-section{padding:64px 20px}
+  .cta-section h2{font-size:clamp(28px,8vw,44px)}
+  .cta-sub{font-size:18px}
+
+  footer{flex-direction:column;gap:12px;text-align:center;padding:24px 20px}
+}
+@media(max-width:380px){
+  .hero h1{font-size:33px}
+  .hero-ey{font-size:14px;letter-spacing:.3em}
+  .nav-link{display:none}
+  #river-c{height:500px}
+  #layers-c{height:320px}
+  .dynamics-wrap .panel{height:260px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-wordmark"><span class="nav-wm-text">Living Mirrors</span></a>
+  <div class="nav-links">
+    <a href="/archetype/" class="nav-link">Archetypes</a>
+    <a href="/modes/" class="nav-link active">Modes</a>
+    <a href="/lab/" class="nav-link">Lab</a>
+    <a href="https://github.com/Living-Mirrors/learn-mode" class="nav-pill">Get Learn Mode</a>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow"></div>
+  <div class="hero-shaft"></div>
+  <span class="hero-ey">Learn Mode — The Learning Axis</span>
+  <h1>Every human learns differently.<br>Every AI teaches the same.</h1>
+  <p class="hero-sub">A specification that detects how you learn and adapts everything to your cognitive architecture. The forgetting curve never had a chance.</p>
+  <div class="vline"></div>
+  <div class="hero-cta"><a href="https://github.com/Living-Mirrors/learn-mode" class="btn btn-dark">Get the Spec</a></div>
+</section>
+
+<div class="section r">
+  <span class="label">The Problem</span>
+  <h2>AI has one delivery method for every mind</h2>
+  <p>The same explanation, the same structure, the same pace, the same channel. For the person who thinks in stories and the person who thinks in diagrams. For the expert refreshing and the beginner encountering. <strong>The illusion of learning is receiving. The reality of learning is generating.</strong></p>
+  <p>Most AI interactions stop at the first level of encoding. You read the response, feel the clarity, and move on. An hour later, 80% is gone. <em>Not because the information was bad. Because the delivery ignored everything about how your brain works.</em></p>
+</div>
+<div class="h-rule"></div>
+
+<div class="fw"><div class="stat-band">
+  <h2 class="r" style="width:100%;text-align:center;margin-bottom:36px;color:var(--learn)">Encoding Matters</h2>
+  <div class="stat r"><div class="num">6</div><div class="lbl">encoding levels</div></div>
+  <div class="stat r" data-d="1"><div class="num">5</div><div class="lbl">learner profiles</div></div>
+  <div class="stat r" data-d="2"><div class="num">20%</div><div class="lbl">retention at receive</div></div>
+  <div class="stat r" data-d="3"><div class="num">100%</div><div class="lbl">retention at teach</div></div>
+</div></div>
+
+<div class="section r">
+  <span class="label">The Neuroscience</span>
+  <h2>The science of memory is not optional. It is the architecture.</h2>
+  <p>Allan Paivio proved that information encoded through two channels is dramatically more resilient than one. James McGaugh showed that emotional hooks activate the amygdala, bonding memories to feeling. Robert Bjork discovered that difficulty during learning predicts long-term retention. <strong>Easy in, easy out. Hard in, permanent.</strong></p>
+  <p>Hermann Ebbinghaus mapped the forgetting curve in 1885. Within an hour, 50% of new information is lost. Within a day, 70%. <em>The curve is only defeated by retrieval practice woven into the flow itself.</em></p>
+</div>
+
+<!-- TWO DYNAMICS: One Size vs. Adapted -->
+<div class="fw dynamics-section">
+  <span class="label r">Two Dynamics</span>
+  <h2 class="r">One Size vs. Adapted</h2>
+  <div class="dynamics-wrap">
+    <div class="panel"><canvas id="onesize-c"></canvas><div class="pl">One Size</div><div class="ps">same delivery, one learner served</div></div>
+    <div class="panel"><canvas id="adapted-c"></canvas><div class="pl">Adapted</div><div class="ps">same content, every learner reached</div></div>
+  </div>
+</div>
+
+<div class="pull-wrap"><div class="pull-quote r">The illusion of learning is receiving.<br>The reality of learning is <em>generating.</em></div></div>
+
+<div class="h-rule"></div>
+
+<div class="section r">
+  <span class="label">The Specification</span>
+  <h2>What if AI could see how your mind works?</h2>
+  <p>Learn Mode is a learning specification. Not a tutor. Not a quiz engine. A document that restructures how an intelligence adapts its delivery to the human it is teaching. From one-size to profiled. From receiving to generating.</p>
+  <p>Seven principles extracted from cognitive science. Six encoding levels. Five learner profiles detected from behavior, not self-report. <strong>The spec IS the adaptation.</strong> Give it to any AI and watch the teaching change. The forgetting curve breaks. Every mind is reached. <em>A different axis entirely.</em></p>
+</div>
+
+<!-- THE PROFILER -->
+<div class="fw profiler-section">
+  <span class="label r">The Profiler</span>
+  <h2 class="r">It watches how you teach, not what</h2>
+  <div class="sub r">"Teach me something you know deeply." The AI listens. Not to the content. To the architecture of your explanation.</div>
+  <div class="profiler-box r" id="profiler-box">
+    <div class="profiler-example">
+      <div class="profiler-label" id="prof-label">Example 1 of 3</div>
+      <div class="profiler-text" id="prof-text"></div>
+    </div>
+    <div class="profiler-detection">
+      <div class="profiler-result" id="prof-tags"></div>
+      <div class="profiler-profile" id="prof-profile">Detecting...</div>
+    </div>
+  </div>
+</div>
+
+<!-- ENCODING STACK -->
+<div class="fw encoding-section">
+  <span class="label r">The Encoding Stack</span>
+  <h2 class="r">Six levels from fragile to permanent</h2>
+  <div class="sub r">Click each level. Watch the bar fill. See where most AI stops and where Learn Mode pushes.</div>
+  <div class="encoding-wrap r" id="encoding-wrap">
+    <div class="encoding-bar" id="enc-bar"><div class="encoding-fill" id="enc-fill" style="height:0%"></div></div>
+    <div class="encoding-levels" id="enc-levels"></div>
+  </div>
+</div>
+
+<!-- THE RIVER — seven principles -->
+<div class="fw river-section">
+  <span class="label r">The Seven Principles</span>
+  <h2 class="r">Information flows through seven transformations</h2>
+  <div class="sub r">Click each waypoint to see how it reshapes the flow.</div>
+  <div class="river-canvas-wrap">
+    <canvas id="river-c"></canvas>
+  </div>
+  <div class="river-detail" id="river-detail">
+    <div class="rd-n" id="rd-n">Click a waypoint</div>
+    <div class="rd-s" id="rd-s"></div>
+    <div class="rd-d" id="rd-d">Seven principles, each one transforming the river of information as it flows toward understanding.</div>
+  </div>
+</div>
+
+<div class="h-rule"></div>
+
+<div class="section r">
+  <p>Detect shapes the channel. Content structures the flow. Emotional adds color. Dual Channel splits into two parallel streams. Push Up creates rapids of active engagement. Calibrate adjusts the width. Retrieval loops back upstream. <em>Each principle transforms the information before it reaches the learner.</em></p>
+</div>
+
+<!-- OUTPUT LAYERS -->
+<div class="fw layers-section">
+  <span class="label r">Output Layers</span>
+  <h2 class="r">Six layers that make adaptation visible</h2>
+  <div class="sub r">Click each layer to see it in action</div>
+  <canvas id="layers-c"></canvas>
+  <div class="ld" id="ld">
+    <div class="ld-n" id="ld-n">Click a layer</div>
+    <div class="ld-s" id="ld-s"></div>
+    <div class="ld-d" id="ld-d">Each layer activates at a different intensity threshold. Together they form the complete adaptation system.</div>
+  </div>
+</div>
+
+<div class="ab-section">
+  <div class="ab-item r">
+    <span class="ab-num">01</span>
+    <h3>Detects before it asks</h3>
+    <p>Your learning profile extracted from behavior, not self-report. People don't know how they learn. Their patterns know.</p>
+  </div>
+  <div class="ab-item r" data-d="1">
+    <span class="ab-num">02</span>
+    <h3>Structures before it delivers</h3>
+    <p>Knowledge type determines the skeleton. Procedural gets sequences. Conceptual gets relationships. The structure precedes the learner.</p>
+  </div>
+  <div class="ab-item r" data-d="2">
+    <span class="ab-num">03</span>
+    <h3>Encodes with emotion, not just information</h3>
+    <p>The amygdala is the gatekeeper. No emotional hook, no long-term memory. Every explanation carries a feeling because feelings are what survive.</p>
+  </div>
+  <div class="ab-item r" data-d="3">
+    <span class="ab-num">04</span>
+    <h3>Pushes up, never lets you coast</h3>
+    <p>Passive reception is a 20% retention ceiling. Every exchange demands generation. You do not receive information. You create understanding.</p>
+  </div>
+  <div class="ab-item anchor r">
+    <span class="ab-num">05</span>
+    <h3>Defeats the forgetting curve in real-time</h3>
+    <p>Retrieval practice woven into the flow. Not a quiz at the end. Not a flashcard later. The curve is broken inside the conversation itself.</p>
+  </div>
+</div>
+<div class="h-rule"></div>
+
+<div class="section r">
+  <span class="label">Origin</span>
+  <p>Built by someone who watched AI teach everyone identically. The same bullet points. The same numbered lists. The same gentle encouragement. As if every brain were a photocopy of every other brain. As if receiving information and learning it were the same thing.</p>
+  <p>The question was not "how do we make AI a better tutor?" The question was: <strong>what does cognitive science actually say about how different minds encode, retain, and retrieve information, and can we build a specification that respects that?</strong></p>
+  <p>Four researchers. 140 years of memory science. Seven principles extracted. One specification that turns any AI from a tool that explains into a system that adapts. <em>A different axis entirely.</em></p>
+</div>
+<div class="pull-wrap"><div class="pull-quote r"><em>The deepest learning is not remembering<br>what you were told. It is generating<br>what you were never shown.</em></div></div>
+
+<section class="cta-section" id="cta">
+  <div class="cta-glow"></div>
+  <h2 class="r">Learn Mode</h2>
+  <div class="cta-sub r">Seven principles. Six encoding levels. Five learner profiles. The specification that adapts any AI to your cognitive architecture. Open source forever.</div>
+  <a href="https://github.com/Living-Mirrors/learn-mode" class="btn btn-dark r">View on GitHub</a><br>
+  <a href="#" class="btn-ghost r">Read the full specification</a>
+</section>
+
+<footer><span class="footer-brand">Living Mirrors</span><span class="footer-url">livingmirrors.ai</span></footer>
+
+<script>
+// Scroll reveal
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('in')})},{threshold:.12});
+document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+
+// Nav dark/light detection
+(function(){
+  const nav=document.querySelector('nav');
+  const hero=document.getElementById('hero');
+  const darkSections=document.querySelectorAll('.dynamics-section,.profiler-section,.encoding-section,.river-section,.cta-section');
+  function checkNav(){
+    const ny=nav.getBoundingClientRect().bottom;
+    let onDark=false;
+    // Hero
+    const hb=hero.getBoundingClientRect();
+    if(ny>=hb.top&&ny<=hb.bottom) onDark=true;
+    // Dark sections
+    darkSections.forEach(s=>{
+      const sb=s.getBoundingClientRect();
+      if(ny>=sb.top&&ny<=sb.bottom) onDark=true;
+    });
+    nav.className=onDark?'on-dark':'on-light';
+  }
+  window.addEventListener('scroll',checkNav,{passive:true});
+  checkNav();
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// HERO — "The Adaptation": A single orb splits into 5 learner paths
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  const c=document.getElementById('hero-canvas'),ctx=c.getContext('2d');
+  let w,h,t=0;
+  const B=[58,126,184],BW=[122,180,222];
+
+  const PROFILES=[
+    {name:'Explorer',col:[80,180,220]},
+    {name:'Architect',col:[100,140,200]},
+    {name:'Storyteller',col:[140,120,200]},
+    {name:'Builder',col:[60,160,160]},
+    {name:'Pattern-Finder',col:[90,170,140]}
+  ];
+
+  // Three choreographed loops
+  const LOOPS=[
+    {speed:.003,splitDelay:.15,convergeStart:.7,style:'graceful'},
+    {speed:.005,splitDelay:.08,convergeStart:.65,style:'fast'},
+    {speed:.004,splitDelay:.2,convergeStart:.72,style:'deliberate'}
+  ];
+
+  let currentLoop=0,progress=0,phase='enter'; // enter, split, converge, pause
+  let pauseTimer=0;
+  let trails=[[],[],[],[],[]];
+
+  function rs(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}
+
+  function getPathPoint(idx,p,loop){
+    // p is 0-1 through the split phase
+    const cx=w/2;
+    const startY=h*.18;
+    const endY=h*.78;
+    const splitY=startY+(endY-startY)*.15;
+    const convergeY=startY+(endY-startY)*.85;
+    const midY=splitY+(convergeY-splitY)*p;
+    const spread=Math.min(w*.3,280);
+
+    // Each profile has a unique path character
+    const offsets=[-2,-1,0,1,2];
+    const baseX=cx+offsets[idx]*(spread/2)*Math.sin(p*Math.PI);
+
+    let dx=0,dy=0;
+    if(idx===0){
+      // Explorer: spiraling wonder
+      dx=Math.sin(p*Math.PI*4)*25*Math.sin(p*Math.PI);
+      dy=Math.cos(p*Math.PI*3)*12*Math.sin(p*Math.PI);
+    } else if(idx===1){
+      // Architect: geometric steps
+      const stepP=Math.floor(p*6)/6;
+      dx=(stepP-p)*40*Math.sin(p*Math.PI);
+      dy=Math.abs(Math.sin(p*Math.PI*6))*(-15)*Math.sin(p*Math.PI);
+    } else if(idx===2){
+      // Storyteller: narrative curve
+      dx=Math.sin(p*Math.PI*2)*35*Math.sin(p*Math.PI);
+      dy=Math.sin(p*Math.PI*1.5)*20*Math.sin(p*Math.PI);
+    } else if(idx===3){
+      // Builder: practical straight segments
+      const seg=Math.floor(p*4);
+      const segP=(p*4-seg);
+      dx=((seg%2===0?1:-1)*15*segP)*Math.sin(p*Math.PI);
+      dy=0;
+    } else {
+      // Pattern-Finder: bouncing between connection points
+      dx=Math.sin(p*Math.PI*5)*20*Math.sin(p*Math.PI);
+      dy=Math.abs(Math.sin(p*Math.PI*4))*(-18)*Math.sin(p*Math.PI);
+    }
+
+    return{x:baseX+dx,y:midY+dy};
+  }
+
+  function draw(){
+    t+=.005;
+    ctx.clearRect(0,0,w,h);
+
+    const loop=LOOPS[currentLoop];
+    progress+=loop.speed;
+
+    const cx=w/2;
+    const startY=h*.18;
+    const endY=h*.78;
+    const mob=w<700;
+
+    if(progress>1.3){
+      // Pause between loops
+      pauseTimer+=.005;
+      if(pauseTimer>1){
+        pauseTimer=0;
+        progress=0;
+        currentLoop=(currentLoop+1)%LOOPS.length;
+        trails=[[],[],[],[],[]];
+      }
+    }
+
+    // Phase boundaries
+    const splitStart=loop.splitDelay;
+    const convergeEnd=1.0;
+
+    // Draw "ONE CONCEPT" label at top
+    ctx.font='300 10px "Helvetica Neue",Arial,sans-serif';
+    ctx.textAlign='center';
+    ctx.fillStyle=`rgba(${BW[0]},${BW[1]},${BW[2]},.15)`;
+    ctx.fillText('ONE CONCEPT',cx,startY-20);
+
+    // Draw "FIVE MINDS" label at bottom
+    ctx.fillText('FIVE MINDS',cx,endY+30);
+
+    if(progress<=1.3){
+      // The orb enters from top
+      const enterP=Math.min(progress/splitStart,1);
+
+      if(progress<splitStart){
+        // Single orb descending
+        const orbY=startY*enterP+startY*(1-enterP)*0;
+        const orbR=6+Math.sin(t*3)*1;
+
+        // Glow
+        ctx.beginPath();ctx.arc(cx,startY+(startY*.3-startY)*enterP+startY,orbR+15,0,Math.PI*2);
+        const g=ctx.createRadialGradient(cx,startY,orbR,cx,startY,orbR+15);
+        g.addColorStop(0,`rgba(${BW[0]},${BW[1]},${BW[2]},.15)`);
+        g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill();
+
+        // Orb
+        ctx.beginPath();ctx.arc(cx,startY,orbR,0,Math.PI*2);
+        const og=ctx.createRadialGradient(cx,startY,0,cx,startY,orbR);
+        og.addColorStop(0,`rgba(${BW[0]},${BW[1]},${BW[2]},.9)`);
+        og.addColorStop(1,`rgba(${B[0]},${B[1]},${B[2]},.3)`);
+        ctx.fillStyle=og;ctx.fill();
+
+        if(loop.style==='deliberate'){
+          // Pause effect: pulsing scan ring
+          const scanR=orbR+8+Math.sin(t*6)*4;
+          ctx.beginPath();ctx.arc(cx,startY,scanR,0,Math.PI*2);
+          ctx.strokeStyle=`rgba(${BW[0]},${BW[1]},${BW[2]},.1)`;ctx.lineWidth=1;ctx.stroke();
+        }
+      } else {
+        // Split phase
+        const splitP=Math.min((progress-splitStart)/(convergeEnd-splitStart),1);
+
+        for(let i=0;i<5;i++){
+          const prof=PROFILES[i];
+          const pt=getPathPoint(i,splitP,loop);
+
+          // Converge at bottom
+          let fx,fy;
+          if(splitP>loop.convergeStart){
+            const convP=(splitP-loop.convergeStart)/(1-loop.convergeStart);
+            const eased=convP*convP*(3-2*convP);
+            fx=pt.x+(cx-pt.x)*eased;
+            fy=pt.y+(endY-pt.y)*eased;
+          } else {
+            fx=pt.x;
+            fy=pt.y;
+          }
+
+          // Trail
+          trails[i].push({x:fx,y:fy,a:1});
+          if(trails[i].length>60) trails[i].shift();
+
+          for(const tr of trails[i]){
+            tr.a*=.96;
+            ctx.beginPath();ctx.arc(tr.x,tr.y,1.5+tr.a*1.5,0,Math.PI*2);
+            ctx.fillStyle=`rgba(${prof.col[0]},${prof.col[1]},${prof.col[2]},${tr.a*.2})`;ctx.fill();
+          }
+
+          // Orb on each path
+          const orbR=4+Math.sin(t*3+i)*1;
+          ctx.beginPath();ctx.arc(fx,fy,orbR,0,Math.PI*2);
+          const og=ctx.createRadialGradient(fx,fy,0,fx,fy,orbR);
+          og.addColorStop(0,`rgba(${prof.col[0]},${prof.col[1]},${prof.col[2]},.8)`);
+          og.addColorStop(1,`rgba(${prof.col[0]},${prof.col[1]},${prof.col[2]},.1)`);
+          ctx.fillStyle=og;ctx.fill();
+
+          // Faint profile name along path
+          if(splitP>.2&&splitP<.8&&!mob){
+            ctx.font='300 9px "Helvetica Neue",Arial,sans-serif';
+            ctx.textAlign='center';
+            ctx.fillStyle=`rgba(${prof.col[0]},${prof.col[1]},${prof.col[2]},${.12+splitP*.08})`;
+            ctx.fillText(prof.name,fx,fy-12);
+          }
+        }
+
+        // Convergence glow at bottom
+        if(splitP>loop.convergeStart){
+          const convP=(splitP-loop.convergeStart)/(1-loop.convergeStart);
+          ctx.beginPath();ctx.arc(cx,endY,20+convP*15,0,Math.PI*2);
+          const cg=ctx.createRadialGradient(cx,endY,0,cx,endY,35);
+          cg.addColorStop(0,`rgba(${BW[0]},${BW[1]},${BW[2]},${.15*convP})`);
+          cg.addColorStop(1,'transparent');ctx.fillStyle=cg;ctx.fill();
+
+          // "understood" label
+          if(convP>.5){
+            ctx.font='italic 300 12px "Cormorant Garamond",Georgia,serif';
+            ctx.textAlign='center';
+            ctx.fillStyle=`rgba(${BW[0]},${BW[1]},${BW[2]},${(convP-.5)*2*.2})`;
+            ctx.fillText('understood',cx,endY+50);
+          }
+        }
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  const hero=document.getElementById('hero');
+  hero.addEventListener('click',()=>{
+    progress=0;pauseTimer=0;trails=[[],[],[],[],[]];
+    currentLoop=(currentLoop+1)%LOOPS.length;
+  });
+  hero.addEventListener('touchstart',()=>{
+    progress=0;pauseTimer=0;trails=[[],[],[],[],[]];
+    currentLoop=(currentLoop+1)%LOOPS.length;
+  },{passive:true});
+  window.addEventListener('resize',rs);
+  rs();draw();
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// TWO DYNAMICS — One Size vs. Adapted
+// ═══════════════════════════════════════════════════════════════
+function dynamicsSim(id,type){
+  const c=document.getElementById(id),ctx=c.getContext('2d');
+  let w,h,t=0;
+  const B=[58,126,184],BW=[122,180,222];
+
+  // 5 receiver shapes
+  const SHAPES=['circle','square','triangle','star','hexagon'];
+  const SHAPE_COLS=[[80,180,220],[100,140,200],[140,120,200],[60,160,160],[90,170,140]];
+
+  let timer=0;
+  let currentArrow=0;
+  let arrowProgress=0;
+  let arrowActive=false;
+  let hitResults=[];
+  let allDone=false;
+  let resetTimer=0;
+
+  function rs(){w=c.width=c.parentElement.offsetWidth;h=c.height=c.parentElement.offsetHeight}
+
+  function drawShape(x,y,shape,r,col,alpha,filled){
+    ctx.beginPath();
+    if(shape==='circle'){
+      ctx.arc(x,y,r,0,Math.PI*2);
+    } else if(shape==='square'){
+      ctx.rect(x-r,y-r,r*2,r*2);
+    } else if(shape==='triangle'){
+      ctx.moveTo(x,y-r);ctx.lineTo(x+r,y+r*.7);ctx.lineTo(x-r,y+r*.7);ctx.closePath();
+    } else if(shape==='star'){
+      for(let i=0;i<5;i++){
+        const a=Math.PI*2*i/5-Math.PI/2;
+        const ox=x+Math.cos(a)*r,oy=y+Math.sin(a)*r;
+        const ia=Math.PI*2*(i+.5)/5-Math.PI/2;
+        const ix=x+Math.cos(ia)*r*.4,iy=y+Math.sin(ia)*r*.4;
+        if(i===0) ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy);
+        ctx.lineTo(ix,iy);
+      }
+      ctx.closePath();
+    } else {
+      for(let i=0;i<6;i++){
+        const a=Math.PI*2*i/6-Math.PI/6;
+        const px=x+Math.cos(a)*r,py=y+Math.sin(a)*r;
+        if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+      }
+      ctx.closePath();
+    }
+    if(filled){
+      ctx.fillStyle=`rgba(${col[0]},${col[1]},${col[2]},${alpha})`;ctx.fill();
+    } else {
+      ctx.strokeStyle=`rgba(${col[0]},${col[1]},${col[2]},${alpha})`;ctx.lineWidth=1.5;ctx.stroke();
+    }
+  }
+
+  function draw(){
+    t+=.005;timer+=.005;
+    ctx.clearRect(0,0,w,h);
+    const mob=w<400;
+    const sx=mob?w*.12:w*.15;
+    const ex=mob?w*.82:w*.8;
+    const baseY=h*.22;
+    const gap=h*.13;
+    const shapeR=mob?10:14;
+
+    if(type==='o'){
+      // ONE SIZE: same arrow, different receivers
+      // Draw receivers
+      for(let i=0;i<5;i++){
+        const ry=baseY+i*gap;
+        const hit=hitResults[i];
+        const alpha=hit==='hit'?.6:hit==='miss'?.12:.25;
+        drawShape(ex,ry,SHAPES[i],shapeR,SHAPE_COLS[i],alpha,hit==='hit');
+        if(hit==='hit'){
+          // Glow
+          ctx.beginPath();ctx.arc(ex,ry,shapeR+8,0,Math.PI*2);
+          const g=ctx.createRadialGradient(ex,ry,shapeR,ex,ry,shapeR+8);
+          g.addColorStop(0,`rgba(${SHAPE_COLS[i][0]},${SHAPE_COLS[i][1]},${SHAPE_COLS[i][2]},.15)`);
+          g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill();
+        }
+        if(hit==='miss'){
+          // Bounce-off particles
+          const age=t-hitResults['t'+i];
+          if(age<1){
+            for(let j=0;j<3;j++){
+              const pa=Math.PI*.5+Math.PI*(j/3-.5);
+              const px=ex-Math.cos(pa)*15*(age*2),py=ry-Math.sin(pa)*10*(age*2);
+              ctx.beginPath();ctx.arc(px,py,1.5,0,Math.PI*2);
+              ctx.fillStyle=`rgba(${B[0]},${B[1]},${B[2]},${.2*(1-age)})`;ctx.fill();
+            }
+          }
+        }
+      }
+
+      // Fire arrows
+      if(!arrowActive&&!allDone&&timer>.7){
+        arrowActive=true;arrowProgress=0;timer=0;
+      }
+      if(arrowActive){
+        arrowProgress+=.02;
+        const ry=baseY+currentArrow*gap;
+        const ax=sx+(ex-shapeR-4-sx)*Math.min(arrowProgress,1);
+
+        // Arrow line
+        ctx.beginPath();ctx.moveTo(sx,ry);ctx.lineTo(ax,ry);
+        ctx.strokeStyle=`rgba(${B[0]},${B[1]},${B[2]},.2)`;ctx.lineWidth=1.5;ctx.stroke();
+
+        // Arrow head (always same shape: small circle)
+        ctx.beginPath();ctx.arc(ax,ry,4,0,Math.PI*2);
+        ctx.fillStyle=`rgba(${BW[0]},${BW[1]},${BW[2]},.6)`;ctx.fill();
+
+        if(arrowProgress>=1){
+          arrowActive=false;
+          // Only the circle fits
+          hitResults[currentArrow]=currentArrow===0?'hit':'miss';
+          hitResults['t'+currentArrow]=t;
+          currentArrow++;
+          if(currentArrow>=5){
+            allDone=true;
+            resetTimer=0;
+          }
+        }
+      }
+
+      // Reset after showing result
+      if(allDone){
+        resetTimer+=.005;
+        if(resetTimer>3){
+          currentArrow=0;arrowActive=false;allDone=false;hitResults=[];resetTimer=0;timer=0;
+        }
+      }
+
+    } else {
+      // ADAPTED: arrow morphs to fit each receiver
+      for(let i=0;i<5;i++){
+        const ry=baseY+i*gap;
+        const hit=hitResults[i];
+        const alpha=hit==='hit'?.6:.25;
+        drawShape(ex,ry,SHAPES[i],shapeR,SHAPE_COLS[i],alpha,hit==='hit');
+        if(hit==='hit'){
+          ctx.beginPath();ctx.arc(ex,ry,shapeR+10,0,Math.PI*2);
+          const g=ctx.createRadialGradient(ex,ry,shapeR,ex,ry,shapeR+10);
+          g.addColorStop(0,`rgba(${SHAPE_COLS[i][0]},${SHAPE_COLS[i][1]},${SHAPE_COLS[i][2]},.2)`);
+          g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill();
+        }
+      }
+
+      if(!arrowActive&&!allDone&&timer>.5){
+        arrowActive=true;arrowProgress=0;timer=0;
+      }
+      if(arrowActive){
+        arrowProgress+=.018;
+        const ry=baseY+currentArrow*gap;
+        const p=Math.min(arrowProgress,1);
+        const ax=sx+(ex-shapeR-4-sx)*p;
+
+        // Arrow line
+        ctx.beginPath();ctx.moveTo(sx,ry);ctx.lineTo(ax,ry);
+        ctx.strokeStyle=`rgba(${SHAPE_COLS[currentArrow][0]},${SHAPE_COLS[currentArrow][1]},${SHAPE_COLS[currentArrow][2]},.2)`;
+        ctx.lineWidth=1.5;ctx.stroke();
+
+        // Morphing arrow head
+        const morphP=Math.max(0,(p-.3)/.7); // starts morphing at 30%
+        const morphR=4*(1-morphP)+shapeR*.6*morphP;
+        drawShape(ax,ry,SHAPES[currentArrow],morphR,SHAPE_COLS[currentArrow],.6,true);
+
+        if(arrowProgress>=1){
+          arrowActive=false;
+          hitResults[currentArrow]='hit';
+          currentArrow++;
+          if(currentArrow>=5){
+            allDone=true;
+            resetTimer=0;
+          }
+        }
+      }
+
+      if(allDone){
+        resetTimer+=.005;
+        if(resetTimer>3){
+          currentArrow=0;arrowActive=false;allDone=false;hitResults=[];resetTimer=0;timer=0;
+        }
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+  new ResizeObserver(()=>rs()).observe(c.parentElement);rs();draw();
+}
+dynamicsSim('onesize-c','o');
+dynamicsSim('adapted-c','a');
+
+// ═══════════════════════════════════════════════════════════════
+// THE PROFILER — auto-cycling examples with scanning effect
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  const EXAMPLES=[
+    {
+      label:'Example 1 of 3',
+      text:'So imagine you\'re standing at the edge of a river. The water is moving fast, right? And you have this one stone. Most people try to throw it across. But what if you placed it carefully, and then the next one, and the next, until you\'ve built a path? That\'s how compound interest works. Each stone is a deposit. The river is time. You\'re not fighting the current, you\'re using it.',
+      highlights:['imagine you\'re standing','river','stone','That\'s how','Each stone is','You\'re not fighting'],
+      tags:['Narrative','Human','Analogical'],
+      trigger:'Teaching',
+      profile:'The Storyteller'
+    },
+    {
+      label:'Example 2 of 3',
+      text:'OK so there are three layers. First layer: input. Data comes in, gets validated, cleaned. Second layer: processing. This is where the transformation happens. Rules applied in sequence, exceptions handled. Third layer: output. Formatted, verified, delivered. Think of it like a factory floor with three stations. Each station has quality control before passing to the next.',
+      highlights:['three layers','First layer','Second layer','Third layer','factory floor','quality control'],
+      tags:['Spatial','Sequential','Structural'],
+      trigger:'Stakes',
+      profile:'The Architect'
+    },
+    {
+      label:'Example 3 of 3',
+      text:'It\'s like music and cooking at the same time. The way a chord progression resolves is the same way flavors balance. A dominant seventh chord wants to go home to the root. A dish that\'s too acidic wants something sweet to resolve it. Both are tension and release. Once you see that pattern, you start seeing it everywhere. Negotiation, storytelling, even comedy.',
+      highlights:['like music and cooking','chord progression','flavors balance','tension and release','pattern','everywhere'],
+      tags:['Analogical','Cross-domain','Connective'],
+      trigger:'Beauty',
+      profile:'The Pattern-Finder'
+    }
+  ];
+
+  let current=0;
+  let phase='typing'; // typing, scanning, detected, pause
+  let charIndex=0;
+  let scanIndex=0;
+  let scanTimer=0;
+  let pauseTimer=0;
+  let tagReveal=0;
+
+  const textEl=document.getElementById('prof-text');
+  const labelEl=document.getElementById('prof-label');
+  const tagsEl=document.getElementById('prof-tags');
+  const profileEl=document.getElementById('prof-profile');
+
+  function renderText(ex,chars,activeHighlights){
+    let html=ex.text.substring(0,chars);
+    // Apply highlights
+    if(activeHighlights>0){
+      let full=ex.text;
+      const hls=ex.highlights.slice(0,activeHighlights);
+      for(const hl of hls){
+        full=full.replace(hl,`<span class="hl active">${hl}</span>`);
+      }
+      html=full;
+    }
+    textEl.innerHTML=html;
+  }
+
+  function renderTags(ex,count){
+    let html='';
+    const allTags=[...ex.tags,'Trigger: '+ex.trigger];
+    for(let i=0;i<allTags.length;i++){
+      html+=`<span class="profiler-tag${i<count?' active':''}">${allTags[i]}</span>`;
+    }
+    tagsEl.innerHTML=html;
+  }
+
+  function tick(){
+    const ex=EXAMPLES[current];
+
+    if(phase==='typing'){
+      charIndex+=2;
+      if(charIndex>=ex.text.length){
+        charIndex=ex.text.length;
+        phase='scanning';
+        scanIndex=0;scanTimer=0;
+      }
+      renderText(ex,charIndex,0);
+      renderTags(ex,0);
+      profileEl.textContent='Detecting...';
+      profileEl.className='profiler-profile';
+    } else if(phase==='scanning'){
+      scanTimer+=16;
+      if(scanTimer>400){
+        scanTimer=0;
+        scanIndex++;
+        if(scanIndex>ex.highlights.length){
+          phase='detected';
+          tagReveal=0;scanTimer=0;
+        }
+      }
+      renderText(ex,ex.text.length,scanIndex);
+      renderTags(ex,0);
+    } else if(phase==='detected'){
+      scanTimer+=16;
+      if(scanTimer>350){
+        scanTimer=0;
+        tagReveal++;
+        if(tagReveal>ex.tags.length+1){
+          phase='profile';
+          scanTimer=0;
+        }
+      }
+      renderText(ex,ex.text.length,ex.highlights.length);
+      renderTags(ex,tagReveal);
+      profileEl.textContent='Analyzing...';
+    } else if(phase==='profile'){
+      renderText(ex,ex.text.length,ex.highlights.length);
+      renderTags(ex,ex.tags.length+1);
+      profileEl.textContent=ex.profile;
+      profileEl.className='profiler-profile active';
+      scanTimer+=16;
+      if(scanTimer>3000){
+        phase='pause';
+        pauseTimer=0;
+      }
+    } else if(phase==='pause'){
+      pauseTimer+=16;
+      if(pauseTimer>500){
+        current=(current+1)%EXAMPLES.length;
+        phase='typing';
+        charIndex=0;scanIndex=0;scanTimer=0;
+        labelEl.textContent=EXAMPLES[current].label;
+        profileEl.textContent='Detecting...';
+        profileEl.className='profiler-profile';
+      }
+    }
+  }
+
+  labelEl.textContent=EXAMPLES[0].label;
+  setInterval(tick,16);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// ENCODING STACK — Interactive vertical bar
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  const LEVELS=[
+    {name:'Receive',pct:20,desc:'Reading, listening. Information enters. No generation required.',marker:'Most AI stops here',markerCol:'rgba(200,80,80,.6)'},
+    {name:'Retrieve',pct:55,desc:'Recalling from memory without looking. The first active effort.',marker:'',markerCol:''},
+    {name:'Apply',pct:65,desc:'Using information in a new context. Transfer begins.',marker:'Learn Mode minimum',markerCol:'rgba(58,126,184,.7)'},
+    {name:'Simulate',pct:75,desc:'Running scenarios. What would happen if? Mental rehearsal.',marker:'',markerCol:''},
+    {name:'Connect',pct:85,desc:'Linking to existing knowledge. The web of understanding thickens.',marker:'',markerCol:''},
+    {name:'Teach',pct:100,desc:'Explaining to another mind. The deepest encoding possible.',marker:'',markerCol:''}
+  ];
+
+  const levelsEl=document.getElementById('enc-levels');
+  const fillEl=document.getElementById('enc-fill');
+  let active=-1;
+
+  // Build level elements
+  LEVELS.forEach((l,i)=>{
+    const el=document.createElement('div');
+    el.className='encoding-level';
+    el.innerHTML=`<div class="el-head"><span class="el-name">${l.name}</span><span class="el-pct">${l.pct}%</span></div>
+      <div class="el-desc">${l.desc}</div>
+      ${l.marker?`<div class="el-marker" style="color:${l.markerCol}">${l.marker}</div>`:''}`;
+    el.addEventListener('click',()=>{
+      active=i;
+      document.querySelectorAll('.encoding-level').forEach((e,j)=>{
+        e.classList.toggle('active',j<=i);
+      });
+      fillEl.style.height=l.pct+'%';
+      // Glow intensity
+      const intensity=l.pct/100;
+      fillEl.style.boxShadow=`0 0 ${20+intensity*30}px rgba(58,126,184,${.1+intensity*.3}), inset 0 0 ${10+intensity*15}px rgba(122,180,222,${.05+intensity*.15})`;
+    });
+    levelsEl.appendChild(el);
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// THE RIVER — Seven principles as waypoints along a flowing river
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  const c=document.getElementById('river-c'),ctx=c.getContext('2d');
+  let w,h,t=0,active=-1,hovered=-1;
+  const B=[58,126,184],BW=[122,180,222];
+
+  const PRINCIPLES=[
+    {n:'Detect, Don\'t Ask',s:'PRINCIPLE 1',d:'Extract from behavior. People don\'t know how they learn. Their behavior knows.',col:[80,180,220]},
+    {n:'Content Before Learner',s:'PRINCIPLE 2',d:'Knowledge type determines structure. Learner determines delivery.',col:[100,140,200]},
+    {n:'Emotional Encoding',s:'PRINCIPLE 3',d:'No emotional hook = information fades. The amygdala is not optional.',col:[140,120,200]},
+    {n:'Dual Channel Minimum',s:'PRINCIPLE 4',d:'One memory trace is fragile. Two are resilient.',col:[200,160,80]},
+    {n:'Push Up the Stack',s:'PRINCIPLE 5',d:'Passive reception is failure. Generation is success.',col:[60,160,160]},
+    {n:'Calibrate in Real-Time',s:'PRINCIPLE 6',d:'The zone of productive struggle is a moving target.',col:[90,170,140]},
+    {n:'Weave Retrieval Into Flow',s:'PRINCIPLE 7',d:'The forgetting curve is defeated in the flow, not after it.',col:[120,140,200]}
+  ];
+
+  let waypoints=[];
+
+  function rs(){
+    const r=c.parentElement.getBoundingClientRect();
+    w=c.width=Math.min(r.width,1100);
+    h=c.height=Math.min(900,Math.max(600,window.innerHeight*.75));
+    // Calculate waypoint positions along river
+    waypoints=[];
+    const padTop=60,padBot=60;
+    const usable=h-padTop-padBot;
+    for(let i=0;i<7;i++){
+      const y=padTop+usable*(i/6);
+      // River meanders
+      const xOff=Math.sin((i/6)*Math.PI*2+.5)*w*.15;
+      waypoints.push({x:w/2+xOff,y:y});
+    }
+  }
+
+  function drawRiver(){
+    // Draw flowing river path
+    ctx.beginPath();
+    ctx.moveTo(w/2,0);
+    for(let i=0;i<waypoints.length;i++){
+      const wp=waypoints[i];
+      if(i===0){
+        ctx.quadraticCurveTo(w/2,wp.y*.5,wp.x,wp.y);
+      } else {
+        const prev=waypoints[i-1];
+        const cpx=(prev.x+wp.x)/2;
+        const cpy=(prev.y+wp.y)/2;
+        ctx.quadraticCurveTo(prev.x,prev.y+(wp.y-prev.y)*.5,wp.x,wp.y);
+      }
+    }
+    const last=waypoints[waypoints.length-1];
+    ctx.quadraticCurveTo(last.x,last.y+(h-last.y)*.5,w/2,h);
+
+    ctx.strokeStyle=`rgba(${B[0]},${B[1]},${B[2]},.12)`;
+    ctx.lineWidth=40;ctx.lineCap='round';ctx.stroke();
+
+    // Second pass: narrower, brighter
+    ctx.strokeStyle=`rgba(${B[0]},${B[1]},${B[2]},.08)`;
+    ctx.lineWidth=20;ctx.stroke();
+
+    // Animated flow particles
+    for(let i=0;i<12;i++){
+      const fp=((t*(.3+i*.02)+i*.08)%1);
+      const idx=fp*(waypoints.length-1);
+      const wi=Math.floor(idx);
+      const wf=idx-wi;
+      if(wi>=waypoints.length-1) continue;
+      const a=waypoints[wi],b=waypoints[wi+1];
+      const px=a.x+(b.x-a.x)*wf;
+      const py=a.y+(b.y-a.y)*wf;
+      const drift=Math.sin(t*2+i*1.5)*8;
+
+      ctx.beginPath();ctx.arc(px+drift,py,2+Math.sin(t*3+i)*.5,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${BW[0]},${BW[1]},${BW[2]},${.08+Math.sin(t+i)*.04})`;ctx.fill();
+    }
+  }
+
+  function drawWaypoints(){
+    for(let i=0;i<7;i++){
+      const wp=waypoints[i];
+      const pr=PRINCIPLES[i];
+      const isActive=i===active;
+      const isHov=i===hovered;
+      const pulse=Math.sin(t*2+i*.5)*.1+.9;
+
+      // Waypoint circle
+      const r=isActive?18:isHov?15:12;
+      const alpha=isActive?.7:isHov?.5:.25;
+
+      // Glow
+      if(isActive||isHov){
+        ctx.beginPath();ctx.arc(wp.x,wp.y,r+15,0,Math.PI*2);
+        const g=ctx.createRadialGradient(wp.x,wp.y,r,wp.x,wp.y,r+15);
+        g.addColorStop(0,`rgba(${pr.col[0]},${pr.col[1]},${pr.col[2]},${isActive?.2:.1})`);
+        g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.fill();
+      }
+
+      ctx.beginPath();ctx.arc(wp.x,wp.y,r*pulse,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${pr.col[0]},${pr.col[1]},${pr.col[2]},${alpha})`;ctx.fill();
+
+      // Inner
+      ctx.beginPath();ctx.arc(wp.x,wp.y,r*.4*pulse,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${isActive?.4:isHov?.3:.15})`;ctx.fill();
+
+      // Number
+      ctx.font=`300 ${isActive?11:10}px "Helvetica Neue",Arial,sans-serif`;
+      ctx.textAlign='center';
+      ctx.fillStyle=`rgba(${pr.col[0]},${pr.col[1]},${pr.col[2]},${isActive?.8:.3})`;
+      const labelSide=wp.x>w/2?-1:1;
+      ctx.fillText((i+1)+'',wp.x+labelSide*(r+14),wp.y+4);
+
+      // Active: show principle name
+      if(isActive&&w>500){
+        ctx.font='italic 300 14px "Cormorant Garamond",Georgia,serif';
+        ctx.fillStyle=`rgba(${pr.col[0]},${pr.col[1]},${pr.col[2]},.6)`;
+        ctx.fillText(pr.n,wp.x+labelSide*(r+14),wp.y+20);
+      }
+
+      // Principle 4: dual channel split visualization
+      if(i===3&&(isActive||active>3)){
+        // Two parallel lines emerging from waypoint
+        ctx.beginPath();
+        ctx.moveTo(wp.x-12,wp.y+r+5);ctx.lineTo(wp.x-15,wp.y+r+35);
+        ctx.strokeStyle=`rgba(${pr.col[0]},${pr.col[1]},${pr.col[2]},.2)`;ctx.lineWidth=3;ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(wp.x+12,wp.y+r+5);ctx.lineTo(wp.x+15,wp.y+r+35);
+        ctx.stroke();
+      }
+
+      // Principle 5: rapids
+      if(i===4&&(isActive||active>4)){
+        for(let j=0;j<4;j++){
+          const ry=wp.y-8+j*6;
+          const rx=wp.x+(j%2===0?-1:1)*8;
+          ctx.beginPath();ctx.moveTo(rx-5,ry);ctx.lineTo(rx+5,ry);
+          ctx.strokeStyle=`rgba(${pr.col[0]},${pr.col[1]},${pr.col[2]},.15)`;ctx.lineWidth=1.5;ctx.stroke();
+        }
+      }
+
+      // Principle 7: retrieval loop upstream
+      if(i===6&&(isActive)){
+        ctx.beginPath();
+        ctx.setLineDash([4,4]);
+        const loopStartY=wp.y-20;
+        const loopEndY=waypoints[1].y+20;
+        ctx.moveTo(wp.x+25,loopStartY);
+        ctx.bezierCurveTo(wp.x+80,loopStartY-100,waypoints[1].x+80,loopEndY+100,waypoints[1].x+25,loopEndY);
+        ctx.strokeStyle=`rgba(${pr.col[0]},${pr.col[1]},${pr.col[2]},.15)`;ctx.lineWidth=1;ctx.stroke();
+        ctx.setLineDash([]);
+        // Arrow
+        ctx.beginPath();
+        ctx.moveTo(waypoints[1].x+25,loopEndY);
+        ctx.lineTo(waypoints[1].x+20,loopEndY-6);
+        ctx.lineTo(waypoints[1].x+30,loopEndY-6);
+        ctx.closePath();
+        ctx.fillStyle=`rgba(${pr.col[0]},${pr.col[1]},${pr.col[2]},.2)`;ctx.fill();
+      }
+    }
+  }
+
+  function draw(){
+    t+=.005;
+    ctx.clearRect(0,0,w,h);
+    drawRiver();
+    drawWaypoints();
+    requestAnimationFrame(draw);
+  }
+
+  function hitTest(mx,my){
+    for(let i=0;i<waypoints.length;i++){
+      const wp=waypoints[i];
+      const dx=mx-wp.x,dy=my-wp.y;
+      if(dx*dx+dy*dy<30*30) return i;
+    }
+    return -1;
+  }
+
+  function updateDetail(){
+    if(active>=0){
+      const p=PRINCIPLES[active];
+      document.getElementById('rd-n').textContent=p.n;
+      document.getElementById('rd-s').textContent=p.s;
+      document.getElementById('rd-d').textContent=p.d;
+      document.getElementById('rd-n').style.color=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},1)`;
+    } else {
+      document.getElementById('rd-n').textContent='Click a waypoint';
+      document.getElementById('rd-s').textContent='';
+      document.getElementById('rd-d').textContent='Seven principles, each one transforming the river of information as it flows toward understanding.';
+      document.getElementById('rd-n').style.color='';
+    }
+  }
+
+  c.addEventListener('click',e=>{const r=c.getBoundingClientRect();active=hitTest(e.clientX-r.left,e.clientY-r.top);updateDetail()});
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();hovered=hitTest(e.clientX-r.left,e.clientY-r.top);c.style.cursor=hovered>=0?'pointer':'default'});
+  c.addEventListener('touchstart',e=>{const r=c.getBoundingClientRect();const touch=e.touches[0];active=hitTest(touch.clientX-r.left,touch.clientY-r.top);updateDetail()},{passive:true});
+
+  window.addEventListener('resize',()=>{rs();updateDetail()});rs();draw();updateDetail();
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// OUTPUT LAYERS — horizontal stacked bars
+// ═══════════════════════════════════════════════════════════════
+(function(){
+  const c=document.getElementById('layers-c'),ctx=c.getContext('2d');
+  let w,h,act=-1,hov=-1;
+  const L=[
+    {n:'Channel Adaptation',s:'Always active',d:'Every explanation reshaped to your primary learning channel. Visual, narrative, procedural, analogical, or systematic. The foundation of all adaptation.',dial:0,col:[58,126,184]},
+    {n:'Emotional Hooks',s:'~30%+',d:'Stakes, curiosity, wonder, surprise. The amygdala activates and bonds the information to feeling. Without this, memory has no anchor.',dial:30,col:[140,120,200]},
+    {n:'Difficulty Gates',s:'~50%+',d:'Desirable difficulty calibrated in real-time. Too easy and attention drops. Too hard and learning stops. The zone of productive struggle.',dial:50,col:[200,160,80]},
+    {n:'Generation Prompts',s:'~60%+',d:'You must produce, not just receive. Fill the blank. Predict what comes next. Explain it back. Active generation encodes deeper than passive reception.',dial:60,col:[60,160,160]},
+    {n:'Callback Threads',s:'~70%+',d:'Earlier concepts woven back into current explanations. Spaced retrieval embedded in the flow. The forgetting curve never gets a foothold.',dial:70,col:[90,170,140]},
+    {n:'Comprehension Pulses',s:'~80%+',d:'Micro-checks that verify understanding without breaking flow. Not quizzes. Organic moments where your response reveals whether encoding held.',dial:80,col:[100,140,200]},
+  ];
+
+  function rs(){const r=c.parentElement.getBoundingClientRect();w=c.width=Math.min(r.width,960);h=c.height=560}
+
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    const mob=h<500;const barH=mob?32:44,gap=mob?14:24,startY=Math.max(20,(h-(L.length*(barH+gap)-gap))/2);
+    const mobW=w<600;const barLeft=mobW?w*.22:w*.18,barRight=mobW?w*.95:w*.88,barW=barRight-barLeft;
+
+    // Dial markers
+    ctx.font='300 10px "Helvetica Neue",Arial,sans-serif';
+    ctx.textAlign='center';
+    for(let p=0;p<=100;p+=20){
+      const px=barLeft+barW*(p/100);
+      ctx.fillStyle='rgba(40,35,28,.1)';ctx.fillText(p+'%',px,startY-14);
+      ctx.beginPath();ctx.moveTo(px,startY-4);ctx.lineTo(px,startY+L.length*(barH+gap)-gap+4);
+      ctx.strokeStyle='rgba(40,35,28,.03)';ctx.lineWidth=.5;ctx.stroke();
+    }
+
+    for(let i=0;i<L.length;i++){
+      const l=L[i],y=startY+i*(barH+gap);
+      const isA=i===act,isH=i===hov;
+      const startX=barLeft+barW*(l.dial/100);
+      const endX=barRight;
+      const col=l.col;
+
+      // Label
+      ctx.font=`${isA?'500':'300'} ${mobW?12:16}px "Cormorant Garamond",Georgia,serif`;
+      ctx.textAlign='right';
+      ctx.fillStyle=isA?`rgba(${col[0]},${col[1]},${col[2]},1)`:`rgba(40,35,28,${isH?.55:.3})`;
+      ctx.fillText(l.n,barLeft-16,y+barH/2+6);
+
+      // Track
+      ctx.fillStyle='rgba(40,35,28,.025)';
+      ctx.fillRect(barLeft,y,barW,barH);
+
+      // Bar
+      const alpha=isA?.45:isH?.25:.12;
+      const grad=ctx.createLinearGradient(startX,0,endX,0);
+      grad.addColorStop(0,`rgba(${col[0]},${col[1]},${col[2]},${alpha*.4})`);
+      grad.addColorStop(.3,`rgba(${col[0]},${col[1]},${col[2]},${alpha})`);
+      grad.addColorStop(1,`rgba(${col[0]},${col[1]},${col[2]},${alpha*.5})`);
+      ctx.fillStyle=grad;
+
+      const rx=6;
+      ctx.beginPath();
+      ctx.moveTo(startX+rx,y);ctx.lineTo(endX-rx,y);ctx.quadraticCurveTo(endX,y,endX,y+rx);
+      ctx.lineTo(endX,y+barH-rx);ctx.quadraticCurveTo(endX,y+barH,endX-rx,y+barH);
+      ctx.lineTo(startX+rx,y+barH);ctx.quadraticCurveTo(startX,y+barH,startX,y+barH-rx);
+      ctx.lineTo(startX,y+rx);ctx.quadraticCurveTo(startX,y,startX+rx,y);
+      ctx.fill();
+
+      // Start marker
+      ctx.beginPath();ctx.arc(startX,y+barH/2,isA?5:3,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${col[0]},${col[1]},${col[2]},${isA?.9:.35})`;ctx.fill();
+
+      if(isH||isA){
+        ctx.strokeStyle=`rgba(${col[0]},${col[1]},${col[2]},${isA?.25:.12})`;ctx.lineWidth=1;
+        ctx.beginPath();
+        ctx.moveTo(startX+rx,y);ctx.lineTo(endX-rx,y);ctx.quadraticCurveTo(endX,y,endX,y+rx);
+        ctx.lineTo(endX,y+barH-rx);ctx.quadraticCurveTo(endX,y+barH,endX-rx,y+barH);
+        ctx.lineTo(startX+rx,y+barH);ctx.quadraticCurveTo(startX,y+barH,startX,y+barH-rx);
+        ctx.lineTo(startX,y+rx);ctx.quadraticCurveTo(startX,y,startX+rx,y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  function upd(){
+    if(act>=0){
+      const l=L[act],col=l.col;
+      document.getElementById('ld-n').textContent=l.n;
+      document.getElementById('ld-s').textContent=l.s;
+      document.getElementById('ld-d').textContent=l.d;
+      document.getElementById('ld-n').style.color=`rgba(${col[0]},${col[1]},${col[2]},1)`;
+      document.getElementById('ld-s').style.color=`rgba(${col[0]},${col[1]},${col[2]},.5)`;
+    } else {
+      document.getElementById('ld-n').textContent='Click a layer';
+      document.getElementById('ld-s').textContent='';
+      document.getElementById('ld-d').textContent='Each layer activates at a different intensity threshold. Together they form the complete adaptation system.';
+      document.getElementById('ld-n').style.color='';document.getElementById('ld-s').style.color='';
+    }
+  }
+
+  function hitTest(mx,my){
+    const mob=h<500;const barH=mob?32:44,gap=mob?14:24,startY=Math.max(20,(h-(L.length*(barH+gap)-gap))/2);
+    for(let i=0;i<L.length;i++){
+      const y=startY+i*(barH+gap);
+      if(mx>w*.05&&mx<w*.95&&my>y-4&&my<y+barH+4) return i;
+    }
+    return -1;
+  }
+
+  c.addEventListener('click',e=>{const r=c.getBoundingClientRect();act=hitTest(e.clientX-r.left,e.clientY-r.top);draw();upd()});
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();hov=hitTest(e.clientX-r.left,e.clientY-r.top);c.style.cursor=hov>=0?'pointer':'default';draw()});
+  window.addEventListener('resize',()=>{rs();draw()});rs();draw();
+})();
+</script>
+</body>
+</html>

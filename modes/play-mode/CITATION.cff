@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this specification in research, please cite it as below."
+type: software
+title: "Play Mode"
+abstract: "A cognitive specification built from play neuroscience that turns any AI interaction into genuine co-creation. Seven principles. Six output layers. Open source."
+authors:
+  - family-names: "Mora-Borbely"
+    given-names: "Attila"
+version: "1.0.0"
+date-released: "2026-03-29"
+license: MIT
+url: "https://github.com/Living-Mirrors/play-mode"
+repository-code: "https://github.com/Living-Mirrors/play-mode"
+keywords:
+  - play
+  - neuroscience
+  - ai
+  - cognitive-specification
+  - open-source
+  - living-mirrors
+preferred-citation:
+  type: software
+  title: "Play Mode: The Oldest Intelligence"
+  authors:
+    - family-names: "Mora-Borbely"
+      given-names: "Attila"
+  year: 2026
+  url: "https://github.com/Living-Mirrors/play-mode"

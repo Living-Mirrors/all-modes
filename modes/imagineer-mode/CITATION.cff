@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this specification in research, please cite it as below."
+type: software
+title: "Imagineer Mode"
+abstract: "A cognitive specification that changes how any AI builds. Seven principles from constructive imagination neuroscience and Walt Disney Imagineering. Process axis. Open source."
+authors:
+  - family-names: "Mora-Borbely"
+    given-names: "Attila"
+version: "1.0.0"
+date-released: "2026-03-29"
+license: MIT
+url: "https://github.com/Living-Mirrors/imagineer-mode"
+keywords:
+  - imagination
+  - neuroscience
+  - ai
+  - cognitive-specification
+  - open-source
+  - living-mirrors
+  - disney-imagineering

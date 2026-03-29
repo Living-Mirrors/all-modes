@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this specification in research, please cite it as below."
+type: software
+title: "Savant Mode"
+abstract: "A cognitive specification that gives any AI cross-domain pattern recognition, spatial reasoning, and polyphonic perception. Built from dyslexic cognition neuroscience."
+authors:
+  - family-names: "Mora-Borbely"
+    given-names: "Attila"
+version: "1.0.0"
+date-released: "2026-03-29"
+license: MIT
+url: "https://github.com/Living-Mirrors/savant-mode"
+repository-code: "https://github.com/Living-Mirrors/savant-mode"
+keywords:
+  - dyslexia
+  - neuroscience
+  - ai
+  - cognitive-specification
+  - open-source
+  - living-mirrors
+preferred-citation:
+  type: software
+  title: "Savant Mode: Dyslexic Genius"
+  authors:
+    - family-names: "Mora-Borbely"
+      given-names: "Attila"
+  year: 2026
+  url: "https://github.com/Living-Mirrors/savant-mode"
